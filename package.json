@@ -1,0 +1,14 @@
+{
+  "name": "fuse-mbtiles",
+  "version": "0.0.0",
+  "description": "FUSE filesystem for MBTiles",
+  "homepage": "https://github.com/mojodna/node-fuse-mbtiles",
+  "repository": "https://github.com/mojodna/node-fuse-mbtiles.git",
+  "author": "Seth Fitzsimmons <seth@mojodna.net>",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "fuse4js": "~0.1.1",
+    "mbtiles": "~0.2.8"
+  }
+}
