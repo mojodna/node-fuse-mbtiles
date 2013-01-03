@@ -81,7 +81,7 @@ var readdir = function(path, callback) {
   var info = lookup(path);
 
   if (info.y !== undefined) {
-    cb(-constants.EINVAL); // this is a file
+    callback(-constants.EINVAL); // this is a file
     return;
   }
 
