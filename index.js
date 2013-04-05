@@ -48,7 +48,7 @@ var getattr = function(path, callback) {
     }
     break;
 
-  case info.y !== undefined:
+  case info.y > 0:
     stat.mode = 0100444; // file with 444 permissions
 
     // TODO get these from the mbtiles file (use that as the default, later
