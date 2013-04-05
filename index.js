@@ -88,15 +88,16 @@ var readdir = function(path, callback) {
   if (info.x !== undefined) {
     var query = tileStore._db.prepare("SELECT DISTINCT tile_row FROM tiles WHERE tile_column = ? AND zoom_level = ?", function(err) {
       if (err) {
-        console.warn(err, info);
+        console.warn("readdir:", err, info);
         callback(-constants.EINVAL);
         return;
       }
 
       query.all(info.x, info.z, function(err, rows) {
         var names = rows.map(function(x) {
+          var y = (1 << info.z) - 1 - x.tile_row;
           // TODO get format from info
-          return String(x.tile_row) + ".png";
+          return String(y) + ".png";
         });
 
         callback(0, names);
