@@ -1,7 +1,15 @@
 var constants = require("constants");
 
+var fs = require("fs"),
+    path = require("path");
+
 var f4js = require("fuse4js"),
     MBTiles = require("mbtiles");
+
+// TODO require these arguments
+var args = process.argv.slice(2),
+    filename = path.resolve(args.shift()),
+    mountPoint = path.resolve(args.shift());
 
 var tileStore;
 
@@ -193,7 +201,7 @@ var release = function(path, fh, callback) {
 };
 
 var init = function(callback) {
-  new MBTiles("geography-class.mbtiles", function(err, mbtiles) {
+  new MBTiles(filename, function(err, mbtiles) {
     if (err) throw err;
 
     tileStore = mbtiles;
@@ -227,4 +235,10 @@ var handlers = {
   destroy: destroy
 };
 
-f4js.start("/tmp/mbtiles", handlers, false);
+fs.mkdir(mountPoint, function(err) {
+  if (err && err.code !== "EEXIST") {
+    throw err;
+  }
+
+  f4js.start(mountPoint, handlers, false);
+});
