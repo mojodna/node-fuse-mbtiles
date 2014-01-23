@@ -219,6 +219,22 @@ var destroy = function(callback) {
   tileStore.close(callback);
 };
 
+var statfs = function(callback) {
+  return callback(0, {
+    bsize: 1000000,
+    frsize: 1000000,
+    blocks: 1000000,
+    bfree: 1000000,
+    bavail: 1000000,
+    files: 1000000,
+    ffree: 1000000,
+    favail: 1000000,
+    fsid: 1000000,
+    flag: 1000000,
+    namemax: 1000000
+  });
+};
+
 var handlers = {
   getattr: getattr,
   readdir: readdir,
@@ -232,7 +248,8 @@ var handlers = {
   // mkdir: mkdir,
   // rmdir: rmdir,
   init: init,
-  destroy: destroy
+  destroy: destroy,
+  statfs: statfs
 };
 
 fs.mkdir(mountPoint, function(err) {
